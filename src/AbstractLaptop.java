@@ -1,5 +1,5 @@
 
-public abstract class AbstractLaptop implements Laptop {
+public abstract class AbstractLaptop extends CartObject implements Laptop {
 	
 	protected Color color;
 	protected LaptopMemory laptopMemory;
@@ -31,7 +31,5 @@ public abstract class AbstractLaptop implements Laptop {
 		// TODO Auto-generated method stub
 		this.laptopMemory = laptopMemory;
 	}
-	@Override
-	public abstract double getPrice();
 
 }

@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 
 public class StoreOrder {
-	private ArrayList<Object> orderArrayList;
+	private ArrayList<CartObject> orderArrayList;
 	
 	public StoreOrder() {
-		orderArrayList = new ArrayList<Object>();
+		orderArrayList = new ArrayList<CartObject>();
 	}
 	
-	public void addOrder(Object object) {
+	public void addOrder(CartObject object) {
 		orderArrayList.add(object);
 	}
 	
@@ -18,7 +18,7 @@ public class StoreOrder {
 	public double getTotalCost() {
 		double cost = 0.0;
 		for (int i = 0; i < orderArrayList.size(); i++) {
-			cost += orderArrayList.get(i).PRICE;
+			cost += orderArrayList.get(i).getPrice();
 		}
 		return cost;
 	}

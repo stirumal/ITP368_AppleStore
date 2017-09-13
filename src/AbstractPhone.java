@@ -1,14 +1,14 @@
 
-public abstract class AbstractPhone implements Phone{
+public abstract class AbstractPhone extends CartObject implements Phone{
 	protected Color color;
-	protected Memory memory;
+	protected PhoneMemory memory;
 	
 	public AbstractPhone() {
 		this.color = Color.Silver;
-		this.memory = Memory.ThirtyTwoGb;
+		this.memory = PhoneMemory.ThirtyTwoGb;
 	}
 	
-	public AbstractPhone(Color color, Memory memory) {
+	public AbstractPhone(Color color, PhoneMemory memory) {
 		this.color = color;
 		this.memory = memory;
 	}
@@ -19,12 +19,12 @@ public abstract class AbstractPhone implements Phone{
 	}
 
 	@Override
-	public Memory getMemory() {
+	public PhoneMemory getMemory() {
 		return memory;
 	}
 
 	@Override
-	public void upgradeMemory(Memory newMemory) {
+	public void upgradeMemory(PhoneMemory newMemory) {
 		memory = newMemory;
 	}
 
@@ -32,7 +32,5 @@ public abstract class AbstractPhone implements Phone{
 	public void changeColor(Color newColor) {
 		color = newColor;
 	}
-	
-	public abstract double getPrice();
 
 }

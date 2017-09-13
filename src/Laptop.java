@@ -5,6 +5,4 @@ public interface Laptop {
 	public void changeColor(Color color);
 	public void upgradeLaptopMemory(LaptopMemory laptopMemory);
 	
-	public double getPrice();
-	
 }
