@@ -1,3 +1,10 @@
+// Christine Chen, Srivas Tirumala
+// ITP 368, Fall 2017
+// Assignment 4
+// chen410@usc.edu, stirumal@usc.edu
+
+//this file based off the Pizza shop file in assignment 3
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -6,9 +13,7 @@ public class AppleStore {
 	// scanner used in various functions
 	private Scanner sc;
 	// current order of current user
-	private StoreOrder currentOrder;
-	
-	private PizzaMenu menu;
+	static private StoreOrder currentOrder;
 
 	// constructor
 	public AppleStore() {
@@ -19,15 +24,23 @@ public class AppleStore {
 	// main function
 	public static void main(String[] args){
 		AppleStore myShop = new AppleStore();
-		System.out.println("Welcome to the pizza shop!");
-		myShop.createOrder();
+		System.out.println("Welcome to the Apple Store!");
+		currentOrder = new StoreOrder();
 		myShop.askForAction();
 		
 	}
 	
-	// asks for username, assigns username value, creates a new order with username
-	public void createOrder(){
-		currentOrder = new StoreOrder();
+	private String printItems() {
+		String output = "";
+		output += "1: iPhone 6\n";
+		output += "2: iPhone 7\n";
+		output += "3: Macbook Air\n";
+		output += "4: Macbook\n";
+		output += "5: Macbook Pro\n";
+		output += "6: Checkout\n";
+		output += "7: Cancel Order\n";
+		
+		return output;
 	}
 	
 	
@@ -35,123 +48,120 @@ public class AppleStore {
 	// asks user to select from actions in a menu
 	public void askForAction(){
 		boolean finished = false;
-/*		while (!finished){
-			System.out.println(menu.getWholeMenu());
-			int choice = InputHelper.readIntBetween("Choose menu option", 1, PizzaMenu.values().length);
-			switch(PizzaMenu.values()[choice-1]) {
-			case NUM01: 
-				createRegularCrustPizza("custom");
+		while (!finished){
+			int choice = InputHelper.readIntBetween("Choose an item to buy or another action:\n" + printItems(), 1, 7);
+			switch(choice) {
+			case 1: 
+				addIphoneSix();
 				break;
-			case NUM02: 
-				createStuffedCrustPizza();
+			case 2: 
+				addIphoneSeven();
 				break;
-			case NUM03: 
-				createRegularCrustPizza("veggie");
+			case 3: 
+				addMacbookAir();
 				break;
-			case NUM04: 
-				createRegularCrustPizza("meat");
+			case 4: 
+				addMacbook();
 				break;
-			case VIEW:
-				System.out.println(currentOrder);
+			case 5:
+				addMacbookPro();
 				break;
-			case	 CANCEL:
+			case 6:
+				System.out.println(String.format("Your order of %d item(s) costs $%.2f. Thank you for coming, and we hope to see you again soon.", currentOrder.getNumOrders(), currentOrder.getTotalCost()));
+				finished = true;
+				break;
+			case 7:
 				System.out.println("We're sorry you've decided to cancel your order. Have a good day, and we hope to see you again soon.");
 				finished = true;
 				break;
-			case	 PAY:
-				System.out.println(String.format("Your order of %d item(s) costs $%.2f. Thank you for coming, and we hope to see you again soon.", currentOrder.orderSize(), currentOrder.totalCost()));
-				finished = true;
-				break;
-
 			}
-		}*/
+		}
 	}
 	
 
 		
-/*	// create and add a regular crust pizza to the order
-	//kind is passed from askForAction, so is a trusted, programmed value
-	private void createRegularCrustPizza(String kind) {
-		Pizza p = RegularCrustPizza.make(askForSize(), askForCrust());
-		switch(kind) {
-		case "custom": 
-			askForToppings(p); 
-			break;
-		case "veggie": 
-			//neat trick to take an array and turn it to a list:
-			p.addToppings(Arrays.asList(Pizza.VEGGIE_LIST));
-			break;
-		case "meat":	
-			//neat trick to take an array and turn it to a list:
-			p.addToppings(Arrays.asList(Pizza.MEAT_LIST));
-			break;
-		}
-		System.out.println("New pizza added to order: " + p);
-		currentOrder.addPizza(p);
+	// different creators for different items
+	private void addIphoneSix() {
+		CartObject phone = new IphoneSix(askForColor(), askForPhoneMemory());
+		System.out.println("New iPhone 6 added to order");
+		currentOrder.addOrder(phone);
+	}
+	
+	private void addIphoneSeven() {
+		CartObject phone = new IphoneSeven(askForColor(), askForPhoneMemory());
+		System.out.println("New iPhone 7 added to order");
+		currentOrder.addOrder(phone);
+	}
+	
+	private void addMacbookAir() {
+		CartObject macbookAir = new MacbookAir(askForColor(), askForLaptopMemory());
+		System.out.println("New Macbook Air added to order");
+		currentOrder.addOrder(macbookAir);
+	}
+	
+	private void addMacbook() {
+		CartObject macbook = new Macbook(askForColor(), askForLaptopMemory());
+		System.out.println("New Macbook added to order");
+		currentOrder.addOrder(macbook);
+	}
+	
+	private void addMacbookPro() {
+		CartObject macbookPro = new MacbookPro(askForColor(), askForLaptopMemory());
+		System.out.println("New Macbook Pro added to order");
+		currentOrder.addOrder(macbookPro);
 	}
 
-	
-
-	private Size askForSize() {
+	private Color askForColor() {
 		boolean isValid = false;
-		Size size = null;
+		Color color = null;
 		while(!isValid) {
-			String prompt = ("What size pizza do you want?" + Arrays.toString(Size.values()));
-			String input = InputHelper.readString(prompt).toUpperCase();
+			String prompt = ("What color do you want your item to be?" + Arrays.toString(Color.values()));
+			String input = InputHelper.readString(prompt).toUpperCase().replaceAll(" ", "");
 			try {
-				size = Size.valueOf(input);  //can throw an exception if input is not in enum
+				color = Color.valueOf(input);  //can throw an exception if input is not in enum
 				isValid = true;
 			}
 			catch(Exception e) {
-				System.out.println(input + " was not recognized as a valid size option");
+				System.out.println(input + " was not recognized as a valid color option");
 			}
 		}
 		
-		return size;
+		return color;
 	}
 	
-	private CrustType askForCrust() {
+	private PhoneMemory askForPhoneMemory() {
 		boolean isValid = false;
-		CrustType crust = null;
+		PhoneMemory mem = null;
 		while(!isValid) {
-			String prompt = ("What type of crust do you want?" + Arrays.toString(CrustType.values()));
-			String input = InputHelper.readString(prompt).toUpperCase();
+			String prompt = ("How much memory do you want your phone to have? (Do NOT use numbers)" + Arrays.toString(PhoneMemory.values()));
+			String input = InputHelper.readString(prompt).toUpperCase().replaceAll(" ", "");
 			try {
-				crust = CrustType.valueOf(input);  //can throw an exception if input is not in enum
+				mem = PhoneMemory.valueOf(input);  //can throw an exception if input is not in enum
 				isValid = true;
 			}
 			catch(Exception e) {
-				System.out.println(input + " was not recognized as a valid crust type");
+				System.out.println(input + " was not recognized as a valid color option");
 			}
 		}
 		
-		return crust;
-	}
-
-	// create and add a stuffed crust pizza to the order
-	//UPDATE this method to use input helper
-	public void createStuffedCrustPizza(){
-		Size size = askForSize();
-		boolean wantPepperoniBoolean = InputHelper.readBoolean("Do you want pepperoni in the crust? Type \"yes\" or \"YES\" if you want pepperoni in the crust"
-					+ " \n\tand any other keys if you don't want pepperoni in the crust.");
-		StuffedCrustPizza newPizza = new StuffedCrustPizza(size,wantPepperoniBoolean);
-		askForToppings(newPizza);
-		currentOrder.addPizza(newPizza);
+		return mem;
 	}
 	
-	// ask and add toppings to the selected pizza
-	//UPDATE this method to use input helper
-	public void askForToppings(Pizza pizza){
-		String wantToppings = InputHelper.readString("Do you want to add toppings for $0.50 each? Type \"yes\" or \"YES\" if you want to add toppings to your pizza and any other keys if you don't want toppings.");
-		boolean finishedToppings = false;
-		if (wantToppings.equalsIgnoreCase("yes")){
-			while(!finishedToppings){
-				String topping = InputHelper.readString("Type in a topping you want, then press enter. When you are finished typing in all desired toppings, type \"stop\" or \"STOP\" then press enter.");
-				if (topping.equalsIgnoreCase("STOP")){
-					finishedToppings = true;
-				}
-				else pizza.addTopping(topping);
+	private LaptopMemory askForLaptopMemory() {
+		boolean isValid = false;
+		LaptopMemory mem = null;
+		while(!isValid) {
+			String prompt = ("How much memory do you want your laptop to have? (Do NOT use numbers)" + Arrays.toString(LaptopMemory.values()));
+			String input = InputHelper.readString(prompt).toUpperCase().replaceAll(" ", "");
+			try {
+				mem = LaptopMemory.valueOf(input);  //can throw an exception if input is not in enum
+				isValid = true;
+			}
+			catch(Exception e) {
+				System.out.println(input + " was not recognized as a valid color option");
 			}
 		}
-	}*/
+		
+		return mem;
+	}
 }

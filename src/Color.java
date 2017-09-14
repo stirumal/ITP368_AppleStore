@@ -1,9 +1,13 @@
+// Christine Chen, Srivas Tirumala
+// ITP 368, Fall 2017
+// Assignment 4
+// chen410@usc.edu, stirumal@usc.edu
 
 public enum Color {
-	RoseGold("Rose Gold"),
-	Gold("Gold"),
-	SpaceGray("Space Gray"),
-	Silver("Silver");
+	ROSEGOLD("Rose Gold"),
+	GOLD("Gold"),
+	SPACEGRAY("Space Gray"),
+	SILVER("Silver");
 	
 	private String description;
 	

@@ -1,3 +1,7 @@
+// Christine Chen, Srivas Tirumala
+// ITP 368, Fall 2017
+// Assignment 4
+// chen410@usc.edu, stirumal@usc.edu
 
 public abstract class AbstractLaptop extends CartObject implements Laptop {
 	
@@ -5,8 +9,8 @@ public abstract class AbstractLaptop extends CartObject implements Laptop {
 	protected LaptopMemory laptopMemory;
 	
 	public AbstractLaptop() {
-		this.color = Color.SpaceGray;
-		this.laptopMemory = LaptopMemory.OneTweightyEightGb;
+		this.color = Color.SPACEGRAY;
+		this.laptopMemory = LaptopMemory.ONETWOEIGHT;
 	}
 	@Override
 	public Color getColor() {

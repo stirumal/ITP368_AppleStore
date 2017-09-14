@@ -1,11 +1,15 @@
+// Christine Chen, Srivas Tirumala
+// ITP 368, Fall 2017
+// Assignment 4
+// chen410@usc.edu, stirumal@usc.edu
 
 public abstract class AbstractPhone extends CartObject implements Phone{
 	protected Color color;
 	protected PhoneMemory memory;
 	
 	public AbstractPhone() {
-		this.color = Color.Silver;
-		this.memory = PhoneMemory.ThirtyTwoGb;
+		this.color = Color.SILVER;
+		this.memory = PhoneMemory.THIRTYTWO;
 	}
 	
 	public AbstractPhone(Color color, PhoneMemory memory) {

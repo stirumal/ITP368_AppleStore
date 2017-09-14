@@ -1,3 +1,7 @@
+// Christine Chen, Srivas Tirumala
+// ITP 368, Fall 2017
+// Assignment 4
+// chen410@usc.edu, stirumal@usc.edu
 
 public class MacbookPro extends AbstractLaptop {
 	
